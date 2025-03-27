@@ -40,8 +40,9 @@ class Handler extends ExceptionHandler
         });
     }
     public function unauthenticated($request, AuthenticationException $exception)
-{
-    return response()->json(['message' => 'Unauthenticated.'], 401);
-}
-
+    {
+        return response()->json([
+            'message' => 'Invalid or missing token. Please log in again.'
+        ], 401);
+    }
 }

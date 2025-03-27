@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\TransactionController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,4 +25,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/accounts/{account_number}', [AccountController::class, 'showAccountDetails']);
     Route::put('/accounts/{account_number}', [AccountController::class, 'updateAccountDetails']);
     Route::delete('/accounts/{account_number}', [AccountController::class, 'deactivateAccount']);
+
+
+    Route::get('/transactions', [TransactionController::class, 'index']);
+    Route::post('/transactions', [TransactionController::class, 'store']);
+
+    Route::post('/transfer', [TransactionController::class, 'transfer']);
+    Route::get('/transactions/pdf', [TransactionController::class, 'downloadStatement']);
 });
