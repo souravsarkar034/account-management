@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\TransactionController;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Support\Facades\RateLimiter;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,6 +18,9 @@ use App\Http\Controllers\TransactionController;
 |
 */
 
+RateLimiter::for('api', function ($request) {
+    return Limit::perMinute(30)->by(optional($request->user())->id ?: $request->ip());
+});
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
