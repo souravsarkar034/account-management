@@ -10,6 +10,7 @@ This is a backend-only API built using Laravel and MySQL. It provides features f
 - View transaction history
 - Download statements as PDFs
 - Transfer funds between accounts
+- **API Rate Limiting** to prevent abuse
 
 ## Installation
 
@@ -79,6 +80,10 @@ Follow these steps to set up the project:
 | POST    | `/api/transactions`    | Perform a debit/credit transaction |
 | POST    | `/api/transfer`        | Transfer funds between accounts |
 | GET     | `/api/transactions/pdf` | Download PDF transaction statement |
+
+## API Rate Limiting
+
+To prevent API abuse, rate limiting has been implemented. The API allows a maximum of **30 requests per minute** per user. This limit can be adjusted in the `api.php` route file or the `throttle` middleware settings.
 
 ## License
 
